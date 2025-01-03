@@ -28,6 +28,15 @@ AuthorSchema.virtual("url").get(function () {
   return `/catalog/author/${this._id}`;
 });
 
+AuthorSchema.virtual("life_span").get(function() {
+  const date_of_birth =  this.date_of_birth ? DateTime.fromJSDate(this.date_of_birth).toLocaleString(DateTime.DATE_MED) : '';
+  const date_of_death =  this.date_of_death ? DateTime.fromJSDate(this.date_of_death).toLocaleString(DateTime.DATE_MED) : '';
+
+  let life_span =`${date_of_birth} - ${date_of_death}`;
+
+  return life_span
+})
+
 AuthorSchema.virtual("author_date_of_birth").get(function () {
   return this.date_of_birth ? DateTime.fromJSDate(this.date_of_birth).toLocaleString(DateTime.DATE_MED) : '';
 })
